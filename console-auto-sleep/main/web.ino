@@ -69,16 +69,19 @@ void ActivityWebClient::abandonSyncState() {
   }
 }
 
-void ActivityWebClient::looper() {
+// Async looping to get result. You can wrap this method in a while loop for sync behavior
+// return true when loop is not complete
+// return false when loop is complete
+bool ActivityWebClient::looper() {
   if(state == RequestState::IDLE) {
-    return;
+    return false;
   }
   if(!http.available()) {
-    return;
+    return true;
   }
   statusCode = http.responseStatusCode();
   if(!http.headerAvailable()) {
-    return;
+    return true;
   }
   String response = http.responseBody();
   if(statusCode != 200) {
@@ -112,4 +115,5 @@ void ActivityWebClient::looper() {
   getLastActivityTypeCallback = NULL;
   startActivityCallback = NULL;
   endActivityCallback = NULL;
+  return false;
 }

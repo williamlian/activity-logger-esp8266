@@ -22,6 +22,7 @@ class ActivityWebClient {
 public:
   ActivityWebClient() {
     client.setInsecure();
+    http = HttpClient(client, ACTIVITY_SECRET_SERVER, _ACTIVITY_WEB__SERVER_PORT);
     http.connectionKeepAlive();
   }
   // Async
@@ -31,7 +32,7 @@ public:
   // Async
   bool endActivity(int userID, int type, void (*callback)(bool));
   // For scheduler looping
-  void looper();
+  bool looper();
 
 private:
   WiFiClientSecure client;

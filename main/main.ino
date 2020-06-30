@@ -13,9 +13,6 @@
 const int USER_ID = 0;
 const int BUTTON_COUNT = 1;
 
-// debound ms for click detection
-const int DEBOUNCE = 50;
-
 // Button ID => Pin ID
 const int BTN_PIN_MAP[] = {D1, D2, D3, D4, D5};
 // LED ID => Pin ID
@@ -27,10 +24,6 @@ const int BTN_TYPE_MAP[] = {2, -1, -1, -1, -1};
    Tasks
  * ********************************************/
 Scheduler scheduler;
-
-// task to blink 
-bool workerBlink();
-// Task taskBlink(100 * TASK_MILLISECOND, -1, &workerBlink, &scheduler, true);
 
 // task to sync state
 void syncState();

@@ -1,0 +1,8 @@
+#ifndef ACTIVITY_SECRET_H
+#define ACTIVITY_SECRET_H
+
+#define ACTIVITY_SECRET_SSID "xxxx"
+#define ACTIVITY_SECRET_PASS "xxxx"
+#define ACTIVITY_SECRET_SERVER "xxxx"
+
+#endif

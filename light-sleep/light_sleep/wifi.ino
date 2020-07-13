@@ -1,1 +1,1 @@
-../../deep-sleep/main/wifi.ino
+../../deep-sleep/deep_sleep/wifi.ino

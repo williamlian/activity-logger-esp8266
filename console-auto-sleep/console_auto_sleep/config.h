@@ -13,10 +13,8 @@
    ** Console box cannot work in below mode since they need one pin to activate from sleep. **
    LIGHT: 10mA
 */
-//#define SLEEP_MODE_AUTO
+#define SLEEP_MODE_AUTO
 //#define SLEEP_MODE_MODEM
-//#define SLEEP_MODE_LIGHT
-#define SLEEP_MODE_DEEP
 
 const int USER_ID = 0;
 const int BUTTON_COUNT = 1;
@@ -30,7 +28,7 @@ const int LED_PIN_MAP[] = {D6, D7, D8, D9, D10};
 const int BTN_TYPE_MAP[] = {2, -1, -1, -1, -1};
 
 // Loop durations, for auto sleep loop duration is longer
-const int SYNC_DURATION = 10000;
+const int SYNC_DURATION = 60000;
 const int LOOP_DURATION = 100;
 
 const int SYNC_MARK = SYNC_DURATION / LOOP_DURATION;
@@ -45,6 +43,5 @@ const int OFF_LEVEL = HIGH;
 // Onboard LED Pin level
 const int STATUS_ON_LEVEL = LOW;
 const int STATUS_OFF_LEVEL = HIGH;
-
 
 #endif

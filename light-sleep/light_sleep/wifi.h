@@ -1,1 +1,1 @@
-../../deep-sleep/main/wifi.h
+../../deep-sleep/deep_sleep/wifi.h

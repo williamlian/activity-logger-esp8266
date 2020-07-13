@@ -1,1 +1,1 @@
-../../deep-sleep/main/config.h
+../../deep-sleep/deep_sleep/config.h

@@ -59,15 +59,8 @@ void setup() {
   Serial.println();
   logger.log("SDK version: %s \n", ESP.getSdkVersion());
   initLed();
-#ifdef SLEEP_MODE_DEEP
-  // deep sleep need to re-initialize memory
-  logger = ActivityLogger("MAIN");
-  wifi = ActivityWifi();
-  webClient = ActivityWebClient();
-#else
   blinkAll();
   wifi.connectWifi();
-#endif
 }
 
 void loop() {
@@ -76,12 +69,6 @@ void loop() {
 #endif
 #ifdef SLEEP_MODE_MODEM
   loop_modemSleep();
-#endif
-#ifdef SLEEP_MODE_LIGHT
-  loop_lightSleep();
-#endif
-#ifdef SLEEP_MODE_DEEP
-  loop_deepSleep();
 #endif
 }
 
@@ -110,41 +97,6 @@ inline void loop_modemSleep() {
   delay(LOOP_DURATION);
 }
 
-// FIXME: interrupt is not working
-inline void loop_lightSleep() {
-  if(!checkPress()) {
-    syncState();
-  }
-  wifi.lightSleep(SYNC_DURATION, getBtnPin(0));
-  Serial.println();
-  Serial.println();
-}
-
-inline void loop_deepSleep() {
-  String resetCause = ESP.getResetReason();
-  logger.log("\nReset reason = %s, wiating for WIFI", resetCause.c_str());
-  if (resetCause == "External System" || resetCause == "Power on") {
-    blinkAll();
-    wifi.connectWifi();
-    syncState();
-  } else if(digitalRead(getBtnPin(0)) == LOW) {
-    logger.log("wake up from button");
-    blinkAll();
-    wifi.connectWifi();
-    //onClick(0);
-  } else {
-    logger.log("wake up from timer");
-    blinkOnBoard();
-    wifi.connectWifi();
-    //syncState();
-  }
-  wifi.shutDown();
-  logger.log("start deep sleep.\n\n");
-  Serial.flush();
-  ESP.deepSleepInstant((uint32)SYNC_DURATION * 1000, WAKE_NO_RFCAL);
-  delay(50);
-}
-
 void wakeUpAndConnect(int button = -1) {
   if(button == -1) {
     blinkOnBoard();
@@ -152,12 +104,7 @@ void wakeUpAndConnect(int button = -1) {
     blink(button);
   }
   if(!wifi.isConnected()) {
-#ifdef SLEEP_MODE_LIGHT
-    wifi.wakeUpLightSleep();
-#endif 
-#ifdef SLEEP_MODE_MODEM
     wifi.wakeUp();
-#endif
   }
 }
 

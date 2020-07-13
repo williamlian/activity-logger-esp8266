@@ -1,1 +1,1 @@
-../../deep-sleep/main/blinker.h
+../../deep-sleep/deep_sleep/blinker.h

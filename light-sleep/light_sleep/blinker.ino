@@ -1,1 +1,1 @@
-../../deep-sleep/main/blinker.ino
+../../deep-sleep/deep_sleep/blinker.ino

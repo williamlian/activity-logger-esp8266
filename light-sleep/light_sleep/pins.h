@@ -1,1 +1,1 @@
-../../deep-sleep/main/pins.h
+../../deep-sleep/deep_sleep/pins.h
